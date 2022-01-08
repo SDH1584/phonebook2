@@ -37,8 +37,7 @@ public class PhonebookController extends HttpServlet {
 		
 		
 		request.setAttribute("pList", personList);
-		
-		//포워드
+				//포워드
 		RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/list.jsp");
 		rd.forward(request,response);
 		
@@ -64,6 +63,40 @@ public class PhonebookController extends HttpServlet {
 			
 			//리다이렉트 (포워드x) 주소입력
 			response.sendRedirect("/phonebook2/pbc?action=list");
+			
+		}else if("delete".equals(act)) {
+				System.out.println(act);
+				
+				int personId = Integer.parseInt(request.getParameter("personId"));
+				
+				PhoneDao phoneDao = new PhoneDao();
+				
+				phoneDao.personDelete(personId);
+				
+				response.sendRedirect("/phonebook2/pbc?action=list");
+			}
+			else if("updateForm".equals(act)) {
+				System.out.println(act);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/updateForm.jsp");
+				rd.forward(request, response);			
+			}
+			else if("update".equals(act)) {
+				System.out.println(act);
+				
+				PhoneDao phoneDao = new PhoneDao();
+				
+				String name = request.getParameter("name");
+				String hp = request.getParameter("hp");
+				String company = request.getParameter("company");
+				int personId = Integer.parseInt(request.getParameter("personId"));
+				
+				PersonVo pvo = new PersonVo(personId, name, hp, company);
+				
+				phoneDao.personUpdate(pvo);
+				request.setAttribute("vo", pvo);
+
+				response.sendRedirect("/phonebook2/pbc?action=list");
+			
 			
 		}else {
 			System.out.println("파라미터없다");

@@ -38,14 +38,18 @@
 		<tr>
 			<td>회사(company))</td>
 			<td><%=personList.get(i).getCompany() %></td>
+		</tr>
+		<tr>
+			<td><a href="pbc?action=updateForm&personId<%=personList.get(i).getPersonId()%>">[수정]</a></td>
+			<td><a href="pbc?action=delete&personId=<%=personList.get(i).getPersonId()%>">[삭제]</a></td>
 		</tr>	
 	</table>
 	<br>
-	
 	<%
 	}
 	%>
-	
+	<br>
+	<a href="./pbc?action=writeForm">번호 등록</a>
 	
 	
 	
