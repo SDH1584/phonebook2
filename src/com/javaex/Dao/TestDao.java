@@ -9,7 +9,7 @@ public class TestDao {
 	public static void main(String[] args) {
 		
 		PhoneDao phoneDao=new PhoneDao();
-		List <PersonVo>personList=	phoneDao.getPersonList();
+		List <PersonVo>personList=	phoneDao.personSearch(null);
 	
 		System.out.println(personList.toString());
 	}
